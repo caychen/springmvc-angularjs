@@ -1,0 +1,4 @@
+# springmvc-angularjs
+简单使用springmvc和angularjs
+
+简单使用Springmvc和Angularjs进行交互，angularjs作为前台，springmvc作为后台
