@@ -1,0 +1,169 @@
+
+<div class="container" style="margin-top: 20px; width: 50%;">
+	<h3 style="text-align: center;">用户注册</h3>
+	<form name="form" class="form-horizontal"
+		ng-controller="formController" ng-submit="formSubmit();">
+		<!-- 用户名 -->
+		<div class="form-group has-feedback"
+			ng-class="{'has-error':form.uname.$touched && form.uname.$invalid, 'has-success':form.uname.$valid}">
+			<label class="col-sm-2 control-label">用户名</label>
+			<div class="col-sm-10">
+				<input type="text" name="uname" class="form-control"
+					placeholder="请输入用户名" ng-model="user.uname" ng-required="true"
+					ng-minlength="3" ng-maxlength="32" />
+
+				<div ng-if="form.uname.$valid">
+					<span class="glyphicon glyphicon-ok form-control-feedback"></span>
+				</div>
+				<div ng-if="form.uname.$touched && form.uname.$invalid">
+					<span class="glyphicon glyphicon-remove  form-control-feedback"></span>
+				</div>
+
+				<div ng-show="form.uname.$touched && form.uname.$error.maxlength"
+					class="alert alert-danger help-block">
+					<p>用户名长度不能超过32位!</p>
+				</div>
+				<div ng-show="form.uname.$touched && form.uname.$error.minlength"
+					class="alert alert-danger help-block">
+					<p>用户名长度不少于3位!</p>
+				</div>
+				<!-- <div ng-show="form.uname.$touched && form.uname.$error.pattern"
+					class="alert alert-danger help-block">
+					<p>用户名只能包含英文、数字、中文!</p>
+				</div> -->
+			</div>
+		</div>
+		<!-- 密码 -->
+		<div class="form-group has-feedback"
+			ng-class="{'has-error':form.password.$touched && form.password.$invalid, 'has-success':form.password.$valid}">
+			<label class="col-sm-2 control-label">密码</label>
+			<div class="col-sm-10">
+				<input type="password" name="password" class="form-control"
+					placeholder="请输入密码" ng-model="user.password" ng-required="true"
+					ng-minlength="6" />
+				<div ng-if="form.password.$valid">
+					<span class="glyphicon glyphicon-ok form-control-feedback"></span>
+				</div>
+				<div ng-if="form.password.$touched && form.password.$invalid">
+					<span class="glyphicon glyphicon-remove  form-control-feedback"></span>
+				</div>
+
+				<div
+					ng-show="form.password.$touched && form.password.$error.minlength"
+					class="alert alert-danger help-block">
+					用户名长度不少于6位!
+					<p>
+				</p></div>
+			</div>
+		</div>
+
+		<!-- 确认密码 -->
+		<div class="form-group has-feedback"
+			ng-class="{'has-error':form.passwordConfirm.$touched && form.passwordConfirm.$invalid, 'has-success':form.passwordConfirm.$valid}">
+			<label class="col-sm-2 control-label">确认密码</label>
+			<div class="col-sm-10">
+				<input type="password" name="passwordConfirm" class="form-control"
+					placeholder="请输入确认密码" ng-model="user.passwordConfirm"
+					ng-required="true" compare="user.password" />
+
+				<div ng-if="form.passwordConfirm.$valid">
+					<span class="glyphicon glyphicon-ok form-control-feedback"></span>
+				</div>
+				<div
+					ng-if="form.passwordConfirm.$touched && form.passwordConfirm.$invalid || user.passwordConfirm !== user.password">
+					<span class="glyphicon glyphicon-remove  form-control-feedback"></span>
+				</div>
+			</div>
+		</div>
+
+		<!-- 邮箱 -->
+		<div class="form-group has-feedback" ng-class="{'has-error':form.email.$touched && form.email.$invalid}">
+			<label class="col-sm-2 control-label">邮箱</label>
+			<div class="col-sm-10">
+				<input type="email" name="email" class="form-control" placeholder="请输入邮箱" ng-model="user.email" ng-required="true" autocomplete="off" ng-minlength="10" ng-maxlength="30"/>
+
+				<div ng-show="form.email.$touched && form.email.$touched && form.email.$error.minlength" class="alert alert-danger help-block">
+					<p>邮箱长度不少于10位！</p>
+				</div>
+				<div ng-show="form.email.$touched && form.email.$touched && form.email.$error.maxlength" class="alert alert-danger help-block">
+					<p>邮箱长度不超过30位！</p>
+				</div>
+				<div ng-show="form.email.$touched && form.email.$touched && form.email.$error.email" class="alert alert-danger help-block">
+					<p>邮箱格式不正确！</p>
+				</div>
+				<div ng-if="form.email.$valid">
+					<span class="glyphicon glyphicon-ok form-control-feedback"></span>
+				</div>
+				<div ng-if="form.email.$touched && form.email.$invalid">
+					<span class="glyphicon glyphicon-remove  form-control-feedback"></span>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 博客 -->
+		<div class="form-group has-feedback" ng-class="{'has-error':form.blog.$touched && form.blog.$invalid}">
+			<label class="col-sm-2 control-label">博客</label>
+			<div class="col-sm-10">
+				<input type="url" name="blog" class="form-control" placeholder="请输入邮箱" ng-model="user.blog" ng-required="true" autocomplete="off" ng-minlength="10" ng-maxlength="30"/>
+
+				<div ng-show="form.blog.$touched && form.blog.$touched && form.blog.$error.minlength" class="alert alert-danger help-block">
+					<p>博客地址不少于10位！</p>
+				</div>
+				<div ng-show="form.blog.$touched && form.blog.$touched && form.blog.$error.maxlength" class="alert alert-danger help-block">
+					<p>博客地址长度不超过30位！</p>
+				</div>
+				<div ng-show="form.blog.$touched && form.blog.$touched && form.blog.$error.url" class="alert alert-danger help-block">
+					<p>博客地址格式不正确！</p>
+				</div>
+				<div ng-if="form.blog.$valid">
+					<span class="glyphicon glyphicon-ok form-control-feedback"></span>
+				</div>
+				<div ng-if="form.blog.$touched && form.blog.$invalid">
+					<span class="glyphicon glyphicon-remove  form-control-feedback"></span>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 年龄 -->
+		<div class="form-group has-feedback" ng-class="{'has-error':form.age.$touched && form.age.$invalid}">
+			<label class="col-sm-2 control-label">年龄</label>
+			<div class="col-sm-10">
+				<input type="number" name="age" class="form-control" placeholder="请输入年龄" ng-model="user.age" ng-required="true" autocomplete="off" min="1" max="99"/>
+				<div ng-show="form.age.$touched && form.age.$touched && form.age.$error.min" class="alert alert-danger help-block">
+					<p>年龄不低1岁！</p>
+				</div>
+				<div ng-show="form.age.$touched && form.age.$touched && form.age.$error.maxlength" class="alert alert-danger help-block">
+					<p>年龄不超过99位！</p>
+				</div>
+				<div ng-if="form.age.$valid">
+					<span class="glyphicon glyphicon-ok form-control-feedback"></span>
+				</div>
+				<div ng-if="form.blog.$touched && form.age.$invalid || (form.age.$error.max || form.age.$error.min)">
+					<span class="glyphicon glyphicon-remove  form-control-feedback"></span>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 性别 -->
+		<div class="form-group">
+			<label class="col-sm-2 control-label">性别</label>
+			<div class="col-sm-10">
+				<label class="radio-inline">
+					<input type="radio" name="gender" ng-model="user.gender" value="男" ng-checked="true"/>男
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="gender" ng-model="user.gender" value="女" />女
+				</label>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-primary"
+					ng-disabled="form.$invalid">注册</button>
+				<button type="reset" class="btn btn-danger"
+					ng-disabled="!form.$dirty" ng-click="resetForm();">重置</button>
+			</div>
+		</div>
+	</form>
+</div>
